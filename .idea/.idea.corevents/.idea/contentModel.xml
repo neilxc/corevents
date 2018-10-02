@@ -16,8 +16,8 @@
       </e>
       <e p="corevents.sln" t="IncludeFlat" />
       <e p="Domain" t="IncludeRecursive">
+        <e p="AppUser.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
-        <e p="Class1.cs" t="Include" />
         <e p="Domain.csproj" t="IncludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -26,11 +26,18 @@
             </e>
           </e>
         </e>
+        <e p="Role.cs" t="Include" />
+        <e p="UserRole.cs" t="Include" />
       </e>
       <e p="packages" t="ExcludeRecursive" />
       <e p="Persistence" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
-        <e p="Class1.cs" t="Include" />
+        <e p="DataContext.cs" t="Include" />
+        <e p="Migrations" t="Include">
+          <e p="20181002135845_Initial.cs" t="Include" />
+          <e p="20181002135845_Initial.Designer.cs" t="Include" />
+          <e p="DataContextModelSnapshot.cs" t="Include" />
+        </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netstandard2.0" t="Include">
@@ -39,6 +46,7 @@
           </e>
         </e>
         <e p="Persistence.csproj" t="IncludeRecursive" />
+        <e p="TemporaryDbContextFactory.cs" t="Include" />
       </e>
       <e p="Presentation" t="IncludeRecursive">
         <e p=".gitignore" t="Include" />
@@ -49,17 +57,20 @@
           <e p=".gitignore" t="Include" />
           <e p="node_modules" t="ExcludeRecursive">
             <e p="@types" t="IncludeRecursive" />
-            <e p="bootstrap" t="IncludeRecursive" />
             <e p="font-awesome" t="IncludeRecursive" />
+            <e p="formsy-react" t="IncludeRecursive" />
+            <e p="formsy-semantic-ui-react" t="IncludeRecursive" />
+            <e p="mobx" t="IncludeRecursive" />
+            <e p="mobx-react" t="IncludeRecursive" />
             <e p="react" t="IncludeRecursive" />
-            <e p="react-bootstrap" t="IncludeRecursive" />
             <e p="react-dom" t="IncludeRecursive" />
-            <e p="react-router-bootstrap" t="IncludeRecursive" />
             <e p="react-router-dom" t="IncludeRecursive" />
             <e p="react-scripts" t="IncludeRecursive" />
             <e p="rimraf" t="IncludeRecursive" />
             <e p="semantic-ui-css" t="IncludeRecursive" />
             <e p="semantic-ui-react" t="IncludeRecursive" />
+            <e p="superagent" t="IncludeRecursive" />
+            <e p="superagent-promise" t="IncludeRecursive" />
           </e>
           <e p="package-lock.json" t="Include" />
           <e p="package.json" t="Include" />
@@ -81,6 +92,10 @@
               </e>
             </e>
             <e p="features" t="Include">
+              <e p="auth" t="Include">
+                <e p="Login.jsx" t="Include" />
+                <e p="Register.jsx" t="Include" />
+              </e>
               <e p="Counter" t="Include">
                 <e p="Counter.js" t="Include" />
               </e>
@@ -103,6 +118,7 @@
         <e p="Controllers" t="Include">
           <e p="SampleDataController.cs" t="Include" />
         </e>
+        <e p="corevents.db" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp2.1" t="Include">

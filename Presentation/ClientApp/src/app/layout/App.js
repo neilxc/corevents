@@ -4,7 +4,9 @@ import {Route, Switch} from "react-router-dom";
 import {Counter} from "../../features/counter/Counter";
 import {FetchData} from "../../features/fetchdata/FetchData";
 import {Home} from "../../features/home/Home";
-import {NavMenu} from "../../features/nav/NavMenu"; 
+import {NavMenu} from "../../features/nav/NavMenu";
+import Login from "../../features/auth/Login";
+import Register from "../../features/auth/Register"; 
 
 class App extends Component {
     render() {
@@ -20,6 +22,8 @@ class App extends Component {
                             <Route path='/home' component={Home}/>
                             <Route path='/counter' component={Counter}/>
                             <Route path='/fetchdata' component={FetchData}/>
+                            <Route path='/login' component={Login}/>
+                            <Route path='/register' component={Register}/>
                         </Container>
                     </Fragment>
                 )}/>

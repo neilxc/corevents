@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 import {Button, Container, Menu} from "semantic-ui-react";
-import {NavLink} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
 export class NavMenu extends Component {
 
@@ -19,8 +19,8 @@ export class NavMenu extends Component {
                     <Button floated="right" positive inverted content="Create Event"/>
                 </Menu.Item>
                 <Menu.Item position="right">
-                    <Button basic inverted content="Login"/>
-                    <Button basic inverted content="Sign Out" style={{marginLeft: '0.5em'}}/>
+                    <Button as={Link} to={'/login'} basic inverted content="Login"/>
+                    <Button as={Link} to={'/register'} basic inverted content="Register" style={{marginLeft: '0.5em'}}/>
                 </Menu.Item>
             </Container>
         </Menu>

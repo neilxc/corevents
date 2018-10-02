@@ -14,7 +14,11 @@
     ],
     "frameworks": {
       "netstandard2.0": {
-        "projectReferences": {}
+        "projectReferences": {
+          "/Users/neil/Development/Rider/corevents/Domain/Domain.csproj": {
+            "projectPath": "/Users/neil/Development/Rider/corevents/Domain/Domain.csproj"
+          }
+        }
       }
     },
     "warningProperties": {
@@ -26,6 +30,10 @@
   "frameworks": {
     "netstandard2.0": {
       "dependencies": {
+        "Microsoft.EntityFrameworkCore.Sqlite": {
+          "target": "Package",
+          "version": "[2.1.4, )"
+        },
         "NETStandard.Library": {
           "suppressParent": "All",
           "target": "Package",
