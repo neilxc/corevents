@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Button} from "semantic-ui-react";
 
 export class Counter extends Component {
   displayName = Counter.name
@@ -24,7 +25,7 @@ export class Counter extends Component {
 
         <p>Current count: <strong>{this.state.currentCount}</strong></p>
 
-        <button onClick={this.incrementCounter}>Increment</button>
+        <Button color={'green'} onClick={this.incrementCounter}>Increment</Button>
       </div>
     );
   }
