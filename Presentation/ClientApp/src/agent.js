@@ -6,7 +6,7 @@ const superagent = superagentPromise(_superagent, global.Promise);
 
 const API_ROOT = 'api';
 
-const encode = encodeURIComponent;
+// const encode = encodeURIComponent;
 
 const handleErrors = err => {
     if (err && err.response && err.response.status === 401){
@@ -36,13 +36,13 @@ const requests = {
             .use(tokenPlugin)
             .end(handleErrors)
             .then(responseBody),
-    put: url =>
+    put: (url, body) =>
         superagent
             .put(`${API_ROOT}${url}`, body)
             .use(tokenPlugin)
             .end(handleErrors)
             .then(responseBody),
-    post: url =>
+    post: (url, body) =>
         superagent
             .post(`${API_ROOT}${url}`, body)
             .use(tokenPlugin)

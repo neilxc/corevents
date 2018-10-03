@@ -37,10 +37,10 @@ class AuthStore {
         this.values.password = '';
     }
     
-    @action login() {
+    @action login(values) {
         this.inProgress = true;
         this.errors = undefined;
-        return agent.Auth.login(this.values.email, this.values.password)
+        return agent.Auth.login(values.email, values.password)
             .then(({user}) => commonStore.setToken(user.token))
             .then(() => userStore.pullUser())
             .catch(action((err) => {

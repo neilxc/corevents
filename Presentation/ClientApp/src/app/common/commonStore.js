@@ -1,4 +1,4 @@
-import {observable, reaction} from "mobx";
+import {observable, reaction, action} from "mobx";
 
 class CommonStore {
     @observable appName = 'CoreVents';

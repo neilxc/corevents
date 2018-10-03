@@ -8,6 +8,7 @@ namespace Infrastructure
         public static void AddInfrastructureServices(this IServiceCollection services)
         {
             services.AddScoped<IGenerateJwtToken, GenerateJwtToken>();
+            services.AddScoped<ICurrentUserAccessor, CurrentUserAccessor>();
         }
     }
 }
