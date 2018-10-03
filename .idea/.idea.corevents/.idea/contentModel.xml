@@ -27,6 +27,8 @@
         <e p="AppUser.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="Domain.csproj" t="IncludeRecursive" />
+        <e p="Event.cs" t="Include" />
+        <e p="EventAttendee.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netstandard2.0" t="Include">
@@ -64,8 +66,8 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="DataContext.cs" t="Include" />
         <e p="Migrations" t="Include">
-          <e p="20181002180713_initial.cs" t="Include" />
-          <e p="20181002180713_initial.Designer.cs" t="Include" />
+          <e p="20181003153152_initial.cs" t="Include" />
+          <e p="20181003153152_initial.Designer.cs" t="Include" />
           <e p="DataContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
@@ -76,6 +78,7 @@
           </e>
         </e>
         <e p="Persistence.csproj" t="IncludeRecursive" />
+        <e p="Seed.cs" t="Include" />
         <e p="ServiceCollectionExtension.cs" t="Include" />
         <e p="TemporaryDbContextFactory.cs" t="Include" />
       </e>
@@ -137,6 +140,12 @@
               </e>
               <e p="Counter" t="Include">
                 <e p="Counter.js" t="Include" />
+              </e>
+              <e p="event" t="Include">
+                <e p="EventDashboard" t="Include">
+                  <e p="EventDashboard.jsx" t="Include" />
+                </e>
+                <e p="eventStore.js" t="Include" />
               </e>
               <e p="FetchData" t="Include">
                 <e p="FetchData.js" t="Include" />

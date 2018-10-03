@@ -9,7 +9,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20181002180713_initial")]
+    [Migration("20181003153152_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,10 +32,6 @@ namespace Persistence.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -74,6 +70,53 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Domain.Event", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Category");
+
+                    b.Property<string>("City");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int?>("HostId");
+
+                    b.Property<string>("Image");
+
+                    b.Property<double>("Latitude");
+
+                    b.Property<double>("Longitude");
+
+                    b.Property<string>("Title");
+
+                    b.Property<string>("Venue");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HostId");
+
+                    b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("Domain.EventAttendee", b =>
+                {
+                    b.Property<int>("EventId");
+
+                    b.Property<int>("AppUserId");
+
+                    b.Property<DateTime>("DateJoined");
+
+                    b.HasKey("EventId", "AppUserId");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("EventAttendee");
+                });
+
             modelBuilder.Entity("Domain.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -95,12 +138,6 @@ namespace Persistence.Migrations
                         .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new { Id = 1, ConcurrencyStamp = "c693eb0d-77e5-4f12-adff-fbdc543dcc98", Name = "Admin", NormalizedName = "ADMIN" },
-                        new { Id = 2, ConcurrencyStamp = "60e11206-a3d8-4b0a-8e0b-e8f967ce60a6", Name = "Member", NormalizedName = "Member" },
-                        new { Id = 3, ConcurrencyStamp = "2a86c9cc-a400-4cf7-93ec-b604b0c38934", Name = "Moderator", NormalizedName = "MODERATOR" }
-                    );
                 });
 
             modelBuilder.Entity("Domain.UserRole", b =>
@@ -192,6 +229,26 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Domain.Event", b =>
+                {
+                    b.HasOne("Domain.AppUser", "Host")
+                        .WithMany()
+                        .HasForeignKey("HostId");
+                });
+
+            modelBuilder.Entity("Domain.EventAttendee", b =>
+                {
+                    b.HasOne("Domain.AppUser", "Attendee")
+                        .WithMany("AttendingEvents")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Domain.Event", "Event")
+                        .WithMany("Attendees")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Domain.UserRole", b =>
                 {
                     b.HasOne("Domain.Role")
@@ -209,7 +266,7 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.AppUser", "User")
-                        .WithMany()
+                        .WithMany("UserRoles")
                         .HasForeignKey("UserId1");
                 });
 

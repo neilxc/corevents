@@ -8,18 +8,13 @@ class AuthStore {
     @observable errors = undefined;
     
     @observable values = {
-        firstName: '',
-        lastName: '',
+        userName: '',
         email: '',
         password: ''
     };
     
-    @action setFirstName(firstName) {
-        this.values.firstName = firstName;
-    }
-    
     @action setLastName(lastName) {
-        this.values.lastName = lastName;
+        this.values.userName = userName;
     }
     
     @action setEmail(email) {
@@ -31,8 +26,7 @@ class AuthStore {
     }
     
     @action reset() {
-        this.values.firstName = '';
-        this.values.lastName = '';
+        this.values.userName = '';
         this.values.email = '';
         this.values.password = '';
     }
@@ -50,10 +44,10 @@ class AuthStore {
             .finally(action(() => {this.inProgress = false}))
     }
 
-    @action register() {
+    @action register(values) {
         this.inProgress = true;
         this.errors = undefined;
-        return agent.Auth.register(this.values.firstName, this.values.lastName, this.values.email, this.values.password)
+        return agent.Auth.register(values.userName, values.email, values.password)
             .then(({user}) => commonStore.setToken(user.token))
             .then(() => userStore.pullUser())
             .catch(action((err) => {

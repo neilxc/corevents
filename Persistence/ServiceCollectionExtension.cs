@@ -9,6 +9,7 @@ namespace Persistence
         public static void AddDataAccessServices(this IServiceCollection services, string connectionString)
         {
             services.AddDbContext<DataContext>(opt => { opt.UseSqlite(connectionString); });
+            services.AddTransient<Seed>();
         }
     }
 }

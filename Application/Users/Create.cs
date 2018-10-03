@@ -19,8 +19,7 @@ namespace Application.Users
     {
         public class UserData
         {
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
+            public string UserName { get; set; }
             public string Email { get; set; }
             public string Password { get; set; }
         }
@@ -29,8 +28,7 @@ namespace Application.Users
         {
             public UserDataValidator()
             {
-                RuleFor(x => x.FirstName).NotNull().NotEmpty();
-                RuleFor(x => x.LastName).NotNull().NotEmpty();
+                RuleFor(x => x.UserName).NotNull().NotEmpty();
                 RuleFor(x => x.Email).NotNull().NotEmpty();
                 RuleFor(x => x.Password).NotNull().NotEmpty();
             }
@@ -54,16 +52,14 @@ namespace Application.Users
             private readonly DataContext _context;
             private readonly UserManager<AppUser> _userManager;
             private readonly IGenerateJwtToken _jwt;
-            private readonly SignInManager<AppUser> _signInManager;
             private readonly IMapper _mapper;
 
             public Handler(DataContext context, UserManager<AppUser> userManager, IGenerateJwtToken jwt,
-                SignInManager<AppUser> signInManager, IMapper mapper)
+                IMapper mapper)
             {
                 _context = context;
                 _userManager = userManager;
                 _jwt = jwt;
-                _signInManager = signInManager;
                 _mapper = mapper;
             }
 
@@ -74,12 +70,13 @@ namespace Application.Users
                     throw new RestException(HttpStatusCode.BadRequest, new {Email = Constants.IN_USE});
                 }
                 
+                if (await _context.Users.Where(x => x.Email == request.User.Email).AnyAsync(cancellationToken))
+                    throw new RestException(HttpStatusCode.BadRequest, new {UserName = Constants.IN_USE});
+                
                 var appUser = new AppUser
                 {
-                    FirstName = request.User.FirstName,
-                    LastName = request.User.LastName,
                     Email = request.User.Email,
-                    UserName = request.User.Email
+                    UserName = request.User.UserName
                 };
 
                 var result = await _userManager.CreateAsync(appUser, request.User.Password);
@@ -87,7 +84,7 @@ namespace Application.Users
                 if (result.Succeeded)
                 {
                     var userFromDb = await _userManager.FindByEmailAsync(request.User.Email);
-//                    await _userManager.AddToRoleAsync(userFromDb, "Member");
+                    await _userManager.AddToRoleAsync(userFromDb, "Member");
                     var userToReturn = _mapper.Map<AppUser, User>(userFromDb);
                     userToReturn.Token = await _jwt.CreateToken(userFromDb);
                     return new UserEnvelope(userToReturn);

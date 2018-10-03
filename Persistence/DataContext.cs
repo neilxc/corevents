@@ -11,15 +11,14 @@ namespace Persistence
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) {}
 
+        public DbSet<Event> Events { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<Role>().HasData(
-                new Role {Id = 1, Name = "Admin", NormalizedName = "ADMIN"},
-                new Role {Id = 2, Name = "Member", NormalizedName = "MEMBER"},
-                new Role {Id = 3, Name = "Moderator", NormalizedName = "MODERATOR"}
-            );
+            builder.Entity<EventAttendee>()
+                .HasKey(e => new {e.EventId, e.AppUserId});
         }
         
     }
