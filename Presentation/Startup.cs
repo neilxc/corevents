@@ -1,12 +1,20 @@
 using System.Reflection;
+using System.Text;
+using Application;
+using Application.Users;
+using AutoMapper;
+using Infrastructure;
+using Infrastructure.Security;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Persistence;
 
 namespace Presentation
@@ -23,19 +31,26 @@ namespace Presentation
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(opt =>
-            {
-                opt.UseSqlite("Data Source=corevents.db",
-                    options =>
-                    {
-                        options.MigrationsAssembly(typeof(DataContext).GetTypeInfo().Assembly.GetName().Name);
-                    });
-            });
+            services.AddApplicationServices();
+            services.AddDataAccessServices(Configuration.GetConnectionString("DefaultConnection"));
+            services.AddInfrastructureServices();
+
+            services.AddAutoMapper();
             
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(options =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
+            
+            var key = new SymmetricSecurityKey(Encoding.ASCII
+                .GetBytes(Configuration.GetSection("AppSettings:Token").Value));
+            
+            services.AddJwt(key);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,7 +58,8 @@ namespace Presentation
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+//                app.UseDeveloperExceptionPage();
+                app.UseExceptionHandler("/Error");
             }
             else
             {
@@ -54,6 +70,7 @@ namespace Presentation
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

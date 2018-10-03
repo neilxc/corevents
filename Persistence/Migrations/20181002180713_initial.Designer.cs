@@ -9,8 +9,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20181002135845_Initial")]
-    partial class Initial
+    [Migration("20181002180713_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -97,9 +97,9 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetRoles");
 
                     b.HasData(
-                        new { Id = 1, ConcurrencyStamp = "ace04538-3f07-4a11-b558-8a6797a757a4", Name = "Admin", NormalizedName = "ADMIN" },
-                        new { Id = 2, ConcurrencyStamp = "e84b450d-9a02-451c-8d42-b22badca7e93", Name = "Member", NormalizedName = "Member" },
-                        new { Id = 3, ConcurrencyStamp = "7500e553-af0f-488e-a40e-248bf8b7de4e", Name = "Moderator", NormalizedName = "MODERATOR" }
+                        new { Id = 1, ConcurrencyStamp = "c693eb0d-77e5-4f12-adff-fbdc543dcc98", Name = "Admin", NormalizedName = "ADMIN" },
+                        new { Id = 2, ConcurrencyStamp = "60e11206-a3d8-4b0a-8e0b-e8f967ce60a6", Name = "Member", NormalizedName = "Member" },
+                        new { Id = 3, ConcurrencyStamp = "2a86c9cc-a400-4cf7-93ec-b604b0c38934", Name = "Moderator", NormalizedName = "MODERATOR" }
                     );
                 });
 

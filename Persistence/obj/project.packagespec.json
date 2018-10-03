@@ -30,6 +30,18 @@
   "frameworks": {
     "netstandard2.0": {
       "dependencies": {
+        "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+          "target": "Package",
+          "version": "[2.1.3, )"
+        },
+        "Microsoft.EntityFrameworkCore": {
+          "target": "Package",
+          "version": "[2.1.4, )"
+        },
+        "Microsoft.EntityFrameworkCore.Relational": {
+          "target": "Package",
+          "version": "[2.1.4, )"
+        },
         "Microsoft.EntityFrameworkCore.Sqlite": {
           "target": "Package",
           "version": "[2.1.4, )"

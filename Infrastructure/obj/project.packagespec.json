@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "/Users/neil/Development/Rider/corevents/Application/Application.csproj",
-    "projectName": "Application",
-    "projectPath": "/Users/neil/Development/Rider/corevents/Application/Application.csproj",
-    "outputPath": "/Users/neil/Development/Rider/corevents/Application/obj/",
+    "projectUniqueName": "/Users/neil/Development/Rider/corevents/Infrastructure/Infrastructure.csproj",
+    "projectName": "Infrastructure",
+    "projectPath": "/Users/neil/Development/Rider/corevents/Infrastructure/Infrastructure.csproj",
+    "outputPath": "/Users/neil/Development/Rider/corevents/Infrastructure/obj/",
     "projectStyle": "PackageReference",
     "fallbackFolders": [
       "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
@@ -17,12 +17,6 @@
         "projectReferences": {
           "/Users/neil/Development/Rider/corevents/Domain/Domain.csproj": {
             "projectPath": "/Users/neil/Development/Rider/corevents/Domain/Domain.csproj"
-          },
-          "/Users/neil/Development/Rider/corevents/Infrastructure/Infrastructure.csproj": {
-            "projectPath": "/Users/neil/Development/Rider/corevents/Infrastructure/Infrastructure.csproj"
-          },
-          "/Users/neil/Development/Rider/corevents/Persistence/Persistence.csproj": {
-            "projectPath": "/Users/neil/Development/Rider/corevents/Persistence/Persistence.csproj"
           }
         }
       }
@@ -36,23 +30,35 @@
   "frameworks": {
     "netstandard2.0": {
       "dependencies": {
-        "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+        "Microsoft.Extensions.Configuration": {
           "target": "Package",
-          "version": "[5.0.1, )"
+          "version": "[2.1.1, )"
         },
-        "FluentValidation.AspNetCore": {
+        "Microsoft.Extensions.DependencyInjection": {
           "target": "Package",
-          "version": "[8.0.100, )"
+          "version": "[2.1.1, )"
         },
-        "MediatR.Extensions.Microsoft.DependencyInjection": {
+        "Microsoft.Extensions.Identity.Core": {
           "target": "Package",
-          "version": "[5.1.0, )"
+          "version": "[2.1.3, )"
+        },
+        "Microsoft.Extensions.Identity.Stores": {
+          "target": "Package",
+          "version": "[2.1.3, )"
+        },
+        "Microsoft.IdentityModel.Tokens": {
+          "target": "Package",
+          "version": "[5.2.4, )"
         },
         "NETStandard.Library": {
           "suppressParent": "All",
           "target": "Package",
           "version": "[2.0.3, )",
           "autoReferenced": true
+        },
+        "System.IdentityModel.Tokens.Jwt": {
+          "target": "Package",
+          "version": "[5.2.4, )"
         }
       },
       "imports": [

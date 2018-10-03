@@ -17,7 +17,7 @@ namespace Persistence
 
             builder.Entity<Role>().HasData(
                 new Role {Id = 1, Name = "Admin", NormalizedName = "ADMIN"},
-                new Role {Id = 2, Name = "Member", NormalizedName = "Member"},
+                new Role {Id = 2, Name = "Member", NormalizedName = "MEMBER"},
                 new Role {Id = 3, Name = "Moderator", NormalizedName = "MODERATOR"}
             );
         }

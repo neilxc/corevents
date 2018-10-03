@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -174,17 +174,17 @@ namespace Persistence.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 1, "ace04538-3f07-4a11-b558-8a6797a757a4", "Admin", "ADMIN" });
+                values: new object[] { 1, "c693eb0d-77e5-4f12-adff-fbdc543dcc98", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 2, "e84b450d-9a02-451c-8d42-b22badca7e93", "Member", "Member" });
+                values: new object[] { 2, "60e11206-a3d8-4b0a-8e0b-e8f967ce60a6", "Member", "Member" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 3, "7500e553-af0f-488e-a40e-248bf8b7de4e", "Moderator", "MODERATOR" });
+                values: new object[] { 3, "2a86c9cc-a400-4cf7-93ec-b604b0c38934", "Moderator", "MODERATOR" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
