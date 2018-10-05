@@ -25,11 +25,12 @@ export class NavMenu extends Component {
                         <img src="/assets/logo.png" alt="logo"/>
                         Re-vents
                     </Menu.Item>
+                    <Menu.Item as={NavLink} to={'/events'} name="Events"/>
                     <Menu.Item as={NavLink} to={'/counter'} name="Counter"/>
                     <Menu.Item as={NavLink} to={'/fetchdata'} name="Fetch Data"/>
                     {isLoggedIn &&
                     <Menu.Item>
-                        <Button floated="right" positive inverted content="Create Event"/>
+                        <Button as={Link} to={'/createEvent'} floated="right" positive inverted content="Create Event"/>
                     </Menu.Item>}
                     {!isLoggedIn &&
                     <SignedOut/>}

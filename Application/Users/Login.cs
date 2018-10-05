@@ -12,7 +12,7 @@ namespace Application.Users
 {
     public class Login
     {
-        public class UserData
+        public struct UserData
         {
             public string Email { get; set; }
             public string Password { get; set; }

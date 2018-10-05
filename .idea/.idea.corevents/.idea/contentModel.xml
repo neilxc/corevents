@@ -6,6 +6,15 @@
         <e p="Application.csproj" t="IncludeRecursive" />
         <e p="auth" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
+        <e p="events" t="Include">
+          <e p="AttendeeDto.cs" t="Include" />
+          <e p="Details.cs" t="Include" />
+          <e p="EventEnvelope.cs" t="Include" />
+          <e p="EventsEnvelope.cs" t="Include" />
+          <e p="EventToReturnDto.cs" t="Include" />
+          <e p="List.cs" t="Include" />
+          <e p="MappingProfile.cs" t="Include" />
+        </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netstandard2.0" t="Include">
@@ -66,8 +75,8 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="DataContext.cs" t="Include" />
         <e p="Migrations" t="Include">
-          <e p="20181003153152_initial.cs" t="Include" />
-          <e p="20181003153152_initial.Designer.cs" t="Include" />
+          <e p="20181004101606_initial.cs" t="Include" />
+          <e p="20181004101606_initial.Designer.cs" t="Include" />
           <e p="DataContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
@@ -112,6 +121,14 @@
           <e p="package.json" t="Include" />
           <e p="public" t="Include">
             <e p="Assets" t="Include">
+              <e p="categoryImages" t="Include">
+                <e p="culture.jpg" t="Include" />
+                <e p="drinks.jpg" t="Include" />
+                <e p="film.jpg" t="Include" />
+                <e p="food.jpg" t="Include" />
+                <e p="music.jpg" t="Include" />
+                <e p="travel.jpg" t="Include" />
+              </e>
               <e p="logo.png" t="Include" />
               <e p="user.png" t="Include" />
             </e>
@@ -130,6 +147,7 @@
                 <e p="App.js" t="Include" />
                 <e p="App.test.js" t="Include" />
                 <e p="Layout.js" t="Include" />
+                <e p="LoadingComponent.jsx" t="Include" />
               </e>
             </e>
             <e p="features" t="Include">
@@ -144,6 +162,21 @@
               <e p="event" t="Include">
                 <e p="EventDashboard" t="Include">
                   <e p="EventDashboard.jsx" t="Include" />
+                </e>
+                <e p="EventDetailed" t="Include">
+                  <e p="EventDetailedChat.jsx" t="Include" />
+                  <e p="EventDetailedHeader.jsx" t="Include" />
+                  <e p="EventDetailedInfo.jsx" t="Include" />
+                  <e p="EventDetailedPage.jsx" t="Include" />
+                  <e p="EventDetailedSidebar.jsx" t="Include" />
+                </e>
+                <e p="EventForm" t="Include">
+                  <e p="EventForm.jsx" t="Include" />
+                </e>
+                <e p="EventList" t="Include">
+                  <e p="EventList.jsx" t="Include" />
+                  <e p="EventListAttendee.jsx" t="Include" />
+                  <e p="EventListItem.jsx" t="Include" />
                 </e>
                 <e p="eventStore.js" t="Include" />
               </e>
@@ -169,6 +202,7 @@
           </e>
         </e>
         <e p="Controllers" t="Include">
+          <e p="EventsController.cs" t="Include" />
           <e p="SampleDataController.cs" t="Include" />
           <e p="UserController.cs" t="Include" />
           <e p="UsersController.cs" t="Include" />

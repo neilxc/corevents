@@ -7,7 +7,10 @@ import {Home} from "../../features/home/Home";
 import {NavMenu} from "../../features/nav/NavMenu";
 import Login from "../../features/auth/Login";
 import Register from "../../features/auth/Register";
-import {inject, observer} from "mobx-react"; 
+import {inject, observer} from "mobx-react";
+import EventDashboard from "../../features/event/EventDashboard/EventDashboard";
+import EventDetailedPage from "../../features/event/EventDetailed/EventDetailedPage";
+import EventForm from "../../features/event/EventForm/EventForm";
 
 @withRouter
 @inject('commonStore', 'userStore')
@@ -35,6 +38,10 @@ class App extends Component {
                     <Fragment>
                         <NavMenu/>
                         <Container className="main">
+                            <Route path='/events' component={EventDashboard}/>
+                            <Route path='/event/:id' component={EventDetailedPage}/>
+                            <Route path='/manage/:id' component={EventForm}/>
+                            <Route path='/createEvent' component={EventForm}/>
                             <Route path='/counter' component={Counter}/>
                             <Route path='/fetchdata' component={FetchData}/>
                             <Route path='/login' component={Login}/>

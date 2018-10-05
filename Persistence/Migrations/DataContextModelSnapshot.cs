@@ -81,8 +81,6 @@ namespace Persistence.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<int?>("HostId");
-
                     b.Property<string>("Image");
 
                     b.Property<double>("Latitude");
@@ -95,8 +93,6 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HostId");
-
                     b.ToTable("Events");
                 });
 
@@ -108,11 +104,13 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime>("DateJoined");
 
+                    b.Property<bool>("IsHost");
+
                     b.HasKey("EventId", "AppUserId");
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("EventAttendee");
+                    b.ToTable("EventAttendees");
                 });
 
             modelBuilder.Entity("Domain.Role", b =>
@@ -227,16 +225,9 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Domain.Event", b =>
-                {
-                    b.HasOne("Domain.AppUser", "Host")
-                        .WithMany()
-                        .HasForeignKey("HostId");
-                });
-
             modelBuilder.Entity("Domain.EventAttendee", b =>
                 {
-                    b.HasOne("Domain.AppUser", "Attendee")
+                    b.HasOne("Domain.AppUser", "AppUser")
                         .WithMany("AttendingEvents")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade);

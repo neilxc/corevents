@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace Domain
+namespace Application.Events
 {
-    public class Event
+    public class EventToReturnDto
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -15,6 +15,6 @@ namespace Domain
         public string Image { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }
-        public ICollection<EventAttendee> Attendees { get; set; }
+        public ICollection<AttendeeDto> Attendees { get; set; }
     }
 }

@@ -36,13 +36,17 @@ namespace Presentation
             services.AddInfrastructureServices();
 
             services.AddAutoMapper();
-            
+
             services.AddMvc(options =>
-            {
-                var policy = new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build();
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                {
+                    var policy = new AuthorizationPolicyBuilder()
+                        .RequireAuthenticatedUser()
+                        .Build();
+                }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddJsonOptions(opt =>
+                {
+                    opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                });
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });

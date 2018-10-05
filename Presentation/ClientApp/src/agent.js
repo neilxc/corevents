@@ -59,6 +59,18 @@ const Auth = {
         requests.post('/users/register', {user: {firstName, lastName, email, password}})
 };
 
+const Events = {
+    all: () =>
+        requests.get(`/events`),
+    get: id => 
+        requests.get(`/events/${id}`),
+    create: evt =>
+        requests.post('/events', {evt}),
+    update: evt =>
+        requests.put(`/events/${evt.id}`, {evt})
+};
+
 export default {
-    Auth
+    Auth,
+    Events
 }

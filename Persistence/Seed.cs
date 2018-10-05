@@ -90,20 +90,21 @@ namespace Persistence
                         Venue = "Empire State Building, 5th Avenue, New York, NY, USA",
                         Latitude = 40.7484405,
                         Longitude = -73.98566440000002,
-                        Host = _userManager.FindByNameAsync("Bob").Result,
                         Attendees = new List<EventAttendee>
                         {
                             new EventAttendee
                             {
                                 AppUserId = 2,
                                 EventId = 1,
-                                DateJoined = DateTime.Now.AddDays(12)
+                                DateJoined = DateTime.Now.AddDays(12),
+                                IsHost = true
                             },
                             new EventAttendee
                             {
                                 AppUserId = 3,
                                 EventId = 1,
-                                DateJoined = DateTime.Now.AddDays(13)
+                                DateJoined = DateTime.Now.AddDays(13),
+                                IsHost = false
                             }
                         }
                     },
@@ -118,20 +119,21 @@ namespace Persistence
                         Venue = "Punch & Judy, Henrietta Street, London, UK",
                         Latitude = 51.5118074,
                         Longitude = -0.12300089999996544,
-                        Host = _userManager.FindByNameAsync("Dave").Result,
                         Attendees = new List<EventAttendee>
                         {
                             new EventAttendee
                             {
                                 AppUserId = 4,
                                 EventId = 2,
-                                DateJoined = DateTime.Now.AddDays(5)
+                                DateJoined = DateTime.Now.AddDays(5),
+                                IsHost = true
                             },
                             new EventAttendee
                             {
                                 AppUserId = 3,
                                 EventId = 2,
-                                DateJoined = DateTime.Now.AddDays(6)
+                                DateJoined = DateTime.Now.AddDays(6),
+                                IsHost = false
                             }
                         }
                     }

@@ -9,6 +9,7 @@ import {Provider} from "mobx-react";
 import authStore from "./features/auth/authStore";
 import commonStore from "./app/common/commonStore";
 import userStore from "./features/users/userStore";
+import eventStore from "./features/event/eventStore";
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 const rootElement = document.getElementById('root');
@@ -16,7 +17,8 @@ const rootElement = document.getElementById('root');
 const stores = {
     authStore,
     commonStore,
-    userStore
+    userStore,
+    eventStore
 };
 
 ReactDOM.render(

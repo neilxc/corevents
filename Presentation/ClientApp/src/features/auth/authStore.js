@@ -13,7 +13,7 @@ class AuthStore {
         password: ''
     };
     
-    @action setLastName(lastName) {
+    @action setLastName(userName) {
         this.values.userName = userName;
     }
     

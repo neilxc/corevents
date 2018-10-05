@@ -12,6 +12,7 @@ namespace Persistence
         public DataContext(DbContextOptions<DataContext> options) : base(options) {}
 
         public DbSet<Event> Events { get; set; }
+        public DbSet<EventAttendee> EventAttendees { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
