@@ -17,6 +17,9 @@
         "projectReferences": {
           "/Users/neil/Development/Rider/corevents/Domain/Domain.csproj": {
             "projectPath": "/Users/neil/Development/Rider/corevents/Domain/Domain.csproj"
+          },
+          "/Users/neil/Development/Rider/corevents/Persistence/Persistence.csproj": {
+            "projectPath": "/Users/neil/Development/Rider/corevents/Persistence/Persistence.csproj"
           }
         }
       }
@@ -31,6 +34,10 @@
     "netstandard2.0": {
       "dependencies": {
         "Microsoft.AspNetCore.Http": {
+          "target": "Package",
+          "version": "[2.1.1, )"
+        },
+        "Microsoft.AspNetCore.Routing.Abstractions": {
           "target": "Package",
           "version": "[2.1.1, )"
         },

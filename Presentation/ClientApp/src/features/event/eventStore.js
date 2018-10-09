@@ -1,63 +1,94 @@
-import {observable, action, runInAction, toJS} from "mobx";
+import {observable, action, runInAction, computed} from "mobx";
 import agent from "../../agent";
-import userStore from "../users/userStore";
 
 class EventStore {
-    @observable isLoading = true;
+    @observable isLoading = false;
     @observable isFailure = false;
     @observable isLoadingDetail = true;
-    @observable events = [];
-    @observable event = {};
+    @observable eventsRegistry = observable(new Map());
+    // @observable events = [];
+    // @observable event = {};
     
-    @action async getEvents() {
-        try {
-            const data = await agent.Events.all();
-            runInAction(() => {
-                data.events.forEach((event) => {
-                    event.host = event.attendees.filter(h => h.isHost === true)[0];
-                });
-                this.isLoading = false;
-                this.events = data.events;
-            })
-        } catch (e) {
-            runInAction(() => {
-                this.isLoading = false;
-                this.isFailure = true;
-                this.events = [];
-            })
-        }
+    @computed get events() {
+        return Array.from(this.eventsRegistry.values());
     }
     
-    @action async getEvent(id) {
+    clear() {
+        this.eventsRegistry.clear();
+    }
+    
+    getEvent(id) {
+        return this.eventsRegistry.get(id);
+    }
+    
+    @action loadEvents() {
+        this.isLoading = true;
+        return agent.Events.all()
+            .then(action(({events}) => {
+                this.eventsRegistry.clear();
+                events.forEach(event => {
+                    event.host = event.attendees.filter(h => h.isHost === true)[0];
+                    this.eventsRegistry.set(event.id, event);
+                });
+            }))
+            .finally(action(() => {this.isLoading = false}));
+    }
+    
+    @action loadEvent(id, {acceptCached = false} = {}) {
+        if (acceptCached) {
+            const event = this.getEvent(id);
+            if (event) return Promise.resolve(event);
+        }
+        this.isLoading = true;
+        return agent.Events.get(id)
+            .then(action(({event}) => {
+                event.host = event.attendees.filter(h => h.isHost === true)[0];
+                this.eventsRegistry.set(event.id, event);
+                return event;
+            }))
+            .finally(action(() => {this.isLoading = false;}))
+    }
+    
+    @action
+    async createEvent(eventToCreate) {
         try {
-            const data = await agent.Events.get(id);
+            this.isLoading = true;
+            const data = await agent.Events.create(eventToCreate);
             runInAction(() => {
-                this.isLoadingDetail = false;
+                this.isLoading = false;
                 data.event.host = data.event.attendees.filter(h => h.isHost === true)[0];
-                this.event = data.event;
+                this.events.push(data.event);
             })
         } catch (e) {
-            runInAction(() => {
-                this.isLoadingDetail = false;
-                this.event = {};
-            })
+            this.isLoading = false;
+            this.isFailure = true;
+            console.log(e);
         }
     }
     
     @action
-    createEvent = (eventToCreate) => {
-        const newEvent = {...eventToCreate};
-        let attendees = [];
-        let attendee = userStore.currentUser;
-        attendee.isHost = true;
-        attendees.push(attendee);
-        newEvent.attendees = attendees;
-        newEvent.host = attendees.filter(h => h.isHost === true)[0];
-        newEvent.id = 99;
-        console.log(newEvent);
-        
-        this.events.push(newEvent);
-        console.log(toJS(this.events));
+    updateEvent(data) {
+        return agent.Events.update(data)
+            .then(({event}) => {
+                event.host = event.attendees.filter(h => h.isHost === true)[0];
+                this.eventsRegistry.set(event.id, event);
+                return event;
+            })
+    }
+}
+
+
+class EventAttendee {
+    @observable id = null;
+    @observable isHost = false;
+    @observable photoUrl = '';
+    @observable userName = '';
+    
+    constructor(id, isHost, photoUrl, userName) {
+        this.id = id;
+        this.isHost = isHost;
+        this.photoUrl = photoUrl;
+        this.userName = userName;
     }
 }
 

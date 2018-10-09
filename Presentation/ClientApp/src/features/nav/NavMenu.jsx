@@ -6,8 +6,7 @@ import SignedIn from "./SignedIn";
 import {inject, observer} from "mobx-react";
 
 @withRouter
-@inject('userStore', 'commonStore', 'authStore')
-@observer
+@inject('userStore', 'commonStore', 'authStore') @observer
 export class NavMenu extends Component {
 
     handleLogout = () => {

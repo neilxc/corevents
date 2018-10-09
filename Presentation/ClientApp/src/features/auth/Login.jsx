@@ -6,15 +6,15 @@ import {withRouter} from "react-router-dom";
 
 @inject('authStore')
 @observer
-@withRouter    
+@withRouter
 class Login extends Component {
-    
+
     handleSubmit = (values) => {
         console.log(values);
         this.props.authStore.login(values)
             .then(() => this.props.history.replace('/counter'));
     };
-    
+
     render() {
         const errorLabel = <Label color={'red'} pointing/>;
         return (

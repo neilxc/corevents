@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
 using Application.Events;
+using Domain;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers
@@ -26,6 +28,20 @@ namespace Presentation.Controllers
         public async Task<EventEnvelope> GetEvent(int id)
         {
             return await _mediator.Send(new Details.Query(id));
+        }
+
+        [HttpPost]
+        public async Task<EventEnvelope> CreateEvent([FromBody]Create.Command command)
+        {
+            return await _mediator.Send(command);
+        }
+
+        [HttpPut("{id}")]
+        [Authorize(Policy = "IsEventHost")]
+        public async Task<EventEnvelope> EditEvent(int id, [FromBody] Edit.Command command)
+        {
+            command.Id = id;
+            return await _mediator.Send(command);
         }
     }
 }

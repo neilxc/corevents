@@ -19,7 +19,7 @@ const responseBody = res => res.body;
 
 const tokenPlugin = req => {
     if (commonStore.token) {
-        req.set('authorization', `Bearer ${commonStore.token}`)
+        req.set('Authorization', `Bearer ${commonStore.token}`);
     }
 };
 
@@ -64,13 +64,13 @@ const Events = {
         requests.get(`/events`),
     get: id => 
         requests.get(`/events/${id}`),
-    create: evt =>
-        requests.post('/events', {evt}),
-    update: evt =>
-        requests.put(`/events/${evt.id}`, {evt})
+    create: event =>
+        requests.post('/events', {event}),
+    update: event =>
+        requests.put(`/events/${event.id}`, {event})
 };
 
 export default {
     Auth,
-    Events
+    Events,
 }

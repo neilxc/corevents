@@ -2,16 +2,40 @@ import React, {Component} from 'react';
 import {Button, Grid, Header, Input, Label, Segment} from "semantic-ui-react";
 import {Form, TextArea} from "formsy-semantic-ui-react";
 import {inject, observer} from "mobx-react";
+import {withRouter} from "react-router-dom";
+import 'react-datepicker/dist/react-datepicker.css';
+import DateInput from "../../../app/form/DateInput";
 
+@withRouter
 @inject('eventStore', 'userStore') @observer
 class EventForm extends Component {
 
-    handleSubmit = (values) => {
-        // const evt = {...values};
-        // evt.host = this.props.userStore.currentUser;
-        // console.log(evt);
-        this.props.eventStore.createEvent(values);
-        this.props.history.push('/events');
+    async componentDidMount() {
+        const id = +this.props.match.params.id;
+        if (id) {
+            await this.props.eventStore.loadEvent(id);
+            this.populateForm();
+        }
+    }
+
+    handleSubmit = async (event) => {
+        const id = +this.props.match.params.id;
+        try {
+            if (id) {
+                event.id = id;
+                await this.props.eventStore.updateEvent(event);
+            } else {
+                await this.props.eventStore.createEvent(event);
+            }
+            this.props.history.push('/events');
+        } catch (e) {
+            console.log(e);
+        }
+    };
+    
+    populateForm = () => {
+        const event = this.props.eventStore.getEvent(+this.props.match.params.id);
+        this.refs.form.reset(event);
     };
     
     render() {
@@ -21,11 +45,10 @@ class EventForm extends Component {
                 <Grid.Column width={10}>
                     <Segment>
                         <Header sub color={'teal'} content={'Event Details'}/>
-                        <Form onValidSubmit={this.handleSubmit}>
+                        <Form ref="form" onValidSubmit={this.handleSubmit} autoComplete='off'>
                             <Form.Input
                                 name={'title'}
                                 placeholder={'Give your event a name'}
-                                validations={'isWords'}
                                 inputAs={Input}
                                 required
                                 validationErrors={{
@@ -74,15 +97,12 @@ class EventForm extends Component {
                                 }}
                                 errorLabel={errorLabel}
                             />
-                            <Form.Input
+                            <DateInput
                                 name={'date'}
-                                placeholder={'Date and time of event'}
-                                // required
-                                inputAs={Input}
-                                validationErrors={{
-                                    isDefaultRequiredValue: 'Date is required',
-                                }}
-                                errorLabel={errorLabel}
+                                placeholderText={'Date and time of event'}
+                                showTimeSelect
+                                dateFormat="YYYY-MM-DD HH:mm"
+                                timeFormat="HH:mm"
                             />
                             <Button positive type={'submit'} content={'Submit'}/>
                             <Button content={'Cancel'}/>

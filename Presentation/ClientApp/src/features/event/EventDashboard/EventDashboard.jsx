@@ -5,16 +5,16 @@ import EventList from "../EventList/EventList";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 
 @inject('eventStore', 'userStore')
-@observer    
+@observer
 class EventDashboard extends Component {
-    async componentDidMount() {
-        await this.props.eventStore.getEvents();
+    componentDidMount() {
+        this.props.eventStore.loadEvents();
     }
-    
+
     render() {
         const {events, isLoading} = this.props.eventStore;
         if (isLoading) return <LoadingComponent inverted={true}/>;
-        
+
         return (
             <Grid>
                 <Grid.Column width={10}>

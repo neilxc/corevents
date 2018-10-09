@@ -11,8 +11,10 @@ class CommonStore {
             () => this.token,
             token => {
                 if (token) {
+                    console.log('there is a token');
                     window.localStorage.setItem('jwt', token);
                 } else {
+                    console.log('no token');
                     window.localStorage.removeItem('jwt');
                 }
             }
@@ -20,10 +22,12 @@ class CommonStore {
     }
     
     @action setToken(token) {
+        console.log('setting token');
         this.token = token;
     }
     
     @action setAppLoaded() {
+        console.log('app is loaded');
         this.appLoaded = true;
     }
 }

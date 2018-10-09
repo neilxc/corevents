@@ -11,26 +11,28 @@ import {inject, observer} from "mobx-react";
 import EventDashboard from "../../features/event/EventDashboard/EventDashboard";
 import EventDetailedPage from "../../features/event/EventDetailed/EventDetailedPage";
 import EventForm from "../../features/event/EventForm/EventForm";
+import DevTools from "mobx-react-devtools";
 
 @withRouter
 @inject('commonStore', 'userStore')
-@observer    
+@observer
 class App extends Component {
     componentWillMount() {
         if (!this.props.commonStore.token) {
             this.props.commonStore.setAppLoaded();
         }
     }
-    
+
     componentDidMount() {
         if (this.props.commonStore.token) {
             this.props.userStore.pullUser().finally(() => this.props.commonStore.setAppLoaded());
         }
     }
-    
+
     render() {
         return (
             <Fragment>
+                <DevTools/>
                 <Switch>
                     <Route exact path='/' component={Home}/>
                 </Switch>

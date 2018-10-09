@@ -6,18 +6,22 @@ import EventDetailedChat from "./EventDetailedChat";
 import EventDetailedSidebar from "./EventDetailedSidebar";
 import {inject, observer} from "mobx-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
+import {withRouter} from "react-router-dom";
 
+@withRouter
 @inject('eventStore') @observer    
 class EventDetailedPage extends Component {
-    
-    async componentDidMount() {
-        const id = this.props.match.params.id;
-        await this.props.eventStore.getEvent(id);
+
+    componentWillMount() {
+        const id = +this.props.match.params.id;
+        this.props.eventStore.loadEvent(id, {acceptCached: true});
     }
     
     render() {
-        const {event, isLoadingDetail} = this.props.eventStore;
-        if (isLoadingDetail) return <LoadingComponent inverted={true}/>;
+        const id = +this.props.match.params.id;
+        const {isLoading} = this.props.eventStore;
+        const event = this.props.eventStore.getEvent(id);
+        if (isLoading) return <LoadingComponent inverted={true}/>;
         return (
             <Grid>
                 <Grid.Column width={10}>
